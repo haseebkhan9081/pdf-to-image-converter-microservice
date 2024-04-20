@@ -3,8 +3,7 @@ import base64
 from io import BytesIO
 from pdf2image import convert_from_bytes
 import pytesseract
-from flask import Flask, request, jsonify
-
+from flask import Flask, request, jsonify,send_file
 app = Flask(__name__)
 
 # Function to fetch PDF from URL and convert to base64
@@ -36,9 +35,11 @@ def perform_ocr(pdf_base64):
         ocr_text += pytesseract.image_to_string(page)
     
     return ocr_text
+
+
 @app.route('/')
 def index():
-    return 'Welcome to the OCR server!'
+    return send_file('index.html')
 
 
 @app.route('/perform_ocr', methods=['POST'])
