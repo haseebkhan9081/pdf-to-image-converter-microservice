@@ -36,6 +36,10 @@ def perform_ocr(pdf_base64):
         ocr_text += pytesseract.image_to_string(page)
     
     return ocr_text
+@app.route('/')
+def index():
+    return 'Welcome to the OCR server!'
+
 
 @app.route('/perform_ocr', methods=['POST'])
 def ocr_endpoint():
